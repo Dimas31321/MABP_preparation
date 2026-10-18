@@ -1,0 +1,27 @@
+{
+  "name": "mabp_preparation",
+  "version": "1.0.0",
+  "description": "Статический сайт для подготовки к контрольной по моделированию и анализу бизнес-процессов. HTML, CSS и обычный JavaScript; без сборки, npm и серверной части.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Dimas31321/MABP_preparation.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Dimas31321/MABP_preparation/issues"
+  },
+  "homepage": "https://github.com/Dimas31321/MABP_preparation#readme",
+  "devDependencies": {
+    "vite": "^8.3.4"
+  }
+}
