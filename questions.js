@@ -1,4 +1,4 @@
-const bank = [];
+export const bank = [];
 function q(v, topic, text, options, correct, explanation) {
   bank.push({
     id: bank.length + 1,

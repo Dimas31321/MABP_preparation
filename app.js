@@ -1,3 +1,4 @@
+import { bank } from "./questions.js";
 const app = document.querySelector("#app");
 let mode = "train",
   run = null,
