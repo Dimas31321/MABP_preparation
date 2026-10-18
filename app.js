@@ -1,4 +1,9 @@
+import {
+  registerExtraQuestions,
+  installAdditionalPractice,
+} from "./additional-practice.js";
 import { bank } from "./questions.js";
+registerExtraQuestions(bank);
 const app = document.querySelector("#app");
 let mode = "train",
   run = null,
@@ -55,7 +60,7 @@ function home() {
     })
     .join(
       "",
-    )}</div>${db.active ? `<div class="strip"><div><b>Ты уже начал пробник</b><p>${db.active.label} · ${Object.keys(db.active.answers).length} заданий с ответом</p></div><button class="primary" id="resume">Продолжить →</button></div>` : ""}<div class="strip"><div><b>Ошибки — тоже часть процесса.</b><p>${db.mistakes.length ? "В подборке " + db.mistakes.length + " заданий. Закрепи то, что пока вызывает вопросы." : "Здесь появятся задания, которые стоит повторить. Завершено попыток: " + completed + "."}</p></div><button class="quiet" id="mistakes" ${!db.mistakes.length ? "disabled" : ""}>Повторить ошибки ↗</button></div><p class="source">Учебные авторские задания по темам предоставленных экзаменов 2022, 2023 и частично 2024 года. Это тренировочные варианты, а не официальные экзаменационные билеты. Кейсы оцениваются самостоятельно по эталону. ${saveOk ? "" : "Хранилище браузера недоступно: прогресс сохранится только до закрытия страницы."}</p>`;
+    )}</div>${db.active ? `<div class="strip"><div><b>Ты уже начал пробник</b><p>${db.active.label} · ${Object.keys(db.active.answers).length} заданий с ответом</p></div><button class="primary" id="resume">Продолжить →</button></div>` : ""}<div class="strip"><div><b>Ошибки — тоже часть процесса.</b><p>${db.mistakes.length ? "В подборке " + db.mistakes.length + " заданий. Закрепи то, что пока вызывает вопросы." : "Здесь появятся задания, которые стоит повторить. Завершено попыток: " + completed + "."}</p></div><button class="quiet" id="mistakes" ${!db.mistakes.length ? "disabled" : ""}>Повторить ошибки ↗</button></div><p class="source">Учебные авторские задания по темам предоставленных экзаменов 2022, 2023 и частично 2024 года. Это тренировочные варианты, а не официальные экзаменационные билеты. Кейсы оцениваются самостоятельно по эталону. <br>Зачем ты это читаешь?${saveOk ? "" : "Хранилище браузера недоступно: прогресс сохранится только до закрытия страницы."}</p>`;
   app.querySelectorAll("[data-mode]").forEach(
     (b) =>
       (b.onclick = () => {
@@ -295,3 +300,19 @@ document.querySelector(".brand").onclick = (e) => {
   home();
 };
 home();
+installAdditionalPractice({
+  bank,
+  getAttempts: () => db.attempts,
+
+  start: (v) => {
+    start(v);
+
+    if (run && run.v === v && !run.done) {
+      run.label =
+        `Дополнительный пробник ${String(v - 3).padStart(2, "0")}`;
+
+      sync();
+      render();
+    }
+  },
+});
